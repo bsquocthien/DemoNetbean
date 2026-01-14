@@ -3,7 +3,7 @@ package Model;
 public class PERSON {
 
     // định nghĩa thông tin thuộc tính của lớp
-    public String unique_id;
+    private String unique_id;
     public String name;
     public int age;
     public String city;
@@ -11,6 +11,7 @@ public class PERSON {
 
     // Constructor không có tham số đầu vào
     public PERSON() {
+        System.out.println("Constructor không tham số của lớp PERSON");
     }
 
     public PERSON(String unique_id, String name, int age, String city, String gender) {
