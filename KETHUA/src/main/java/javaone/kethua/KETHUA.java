@@ -4,140 +4,166 @@ import Models.classCha;
 import Models.classCon;
 import Models.classOngCo;
 import Models.classOngNoi;
-
+import Products.Electronic;
+import Products.Food;
+import Products.Product;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
-/**
- * Menu đơn giản cho module KETHUA.
- *
- * 1 -> tạo classOngCo 2 -> tạo classOngNoi 3 -> tạo classCha 4 -> tạo classCon
- *
- * Sau khi tạo sẽ in tất cả thuộc tính ra màn hình.
- */
 public class KETHUA {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Tổng thành viên: " + classOngCo.TongThanhVien);
-        classOngCo ongCo = null;
-        classOngNoi ongNoi = null;
-        classCha cha = null;
-        classCon con = null;
 
-        while (true) {
-            System.out.println("\n==== MENU KETHUA ====");
-            System.out.println("1. Tạo ông Cố (classOngCo)");
-            System.out.println("2. Tạo ông Nội (classOngNoi)");
-            System.out.println("3. Tạo cha (classCha)");
-            System.out.println("4. Tạo con (classCon)");
-            System.out.println("0. Thoát");
-            System.out.print("Chọn (0-4): ");
+        Electronic e1 = new Electronic("E003", "Samsung", 15000000);
+        Electronic e2 = new Electronic("E001", "Sony", 25000000);
+        Electronic e3 = new Electronic("E002", "Xiaomi", 5900000);
 
-            String line = sc.nextLine().trim();
-            int choice;
-            try {
-                choice = Integer.parseInt(line);
-            } catch (NumberFormatException e) {
-                System.out.println("Vui lòng nhập 0-4.");
-                continue;
-            }
-
-            switch (choice) {
-                case 0:
-                    System.out.println("Thoát chương trình.");
-                    sc.close();
-                    break;
-
-                case 1:
-                    System.out.print("Nhập CCCD: ");
-                    String cccd = sc.nextLine();
-                    System.out.print("Nhập họ tên: ");
-                    String hoTen = sc.nextLine();
-                    System.out.print("Nhập năm sinh: ");
-                    String namSinh = sc.nextLine();
-
-                    ongCo = new classOngCo(cccd, hoTen, namSinh);
-                    System.out.println("\nĐã tạo ông Cố:");
-                    System.out.println(formatOngCo(ongCo));
-                    break;
-
-                case 2:
-                    System.out.print("Nhập CCCD (ông nội): ");
-                    String cccdOn = sc.nextLine();
-                    System.out.print("Nhập họ tên (ông nội): ");
-                    String hoTenOn = sc.nextLine();
-                    System.out.print("Nhập năm sinh (ông nội): ");
-                    String namSinhOn = sc.nextLine();
-                    System.out.print("Nhập BankCard (ông nội): ");
-                    String bankCard = sc.nextLine();
-
-                    ongNoi = new classOngNoi(bankCard);
-                    // set thông tin ông cố (thừa kế)
-                    ongNoi.setCCCD(cccdOn);
-                    ongNoi.setHoTen(hoTenOn);
-                    ongNoi.setNamSinh(namSinhOn);
-
-                    System.out.println("\nĐã tạo ông Nội:");
-                    System.out.println(formatOngNoi(ongNoi));
-                    break;
-
-                case 3:
-                    System.out.print("Nhập CCCD (cha): ");
-                    String cccdCha = sc.nextLine();
-                    System.out.print("Nhập họ tên (cha): ");
-                    String hoTenCha = sc.nextLine();
-                    System.out.print("Nhập năm sinh (cha): ");
-                    String namSinhCha = sc.nextLine();
-                    System.out.print("Nhập BankCard (cha): ");
-                    String bankCardCha = sc.nextLine();
-                    System.out.print("Nhập Mobile (cha): ");
-                    String mobile = sc.nextLine();
-
-                    cha = new classCha();
-                    // set lớp ông cố / ông nội
-                    cha.setCCCD(cccdCha);
-                    cha.setHoTen(hoTenCha);
-                    cha.setNamSinh(namSinhCha);
-                    cha.setBankCard(bankCardCha);
-                    cha.setMobile(mobile);
-
-                    System.out.println("\nĐã tạo cha:");
-                    System.out.println(formatCha(cha));
-                    break;
-
-                case 4:
-                    System.out.print("Nhập CCCD (con): ");
-                    String cccdCon = sc.nextLine();
-                    System.out.print("Nhập họ tên (con): ");
-                    String hoTenCon = sc.nextLine();
-                    System.out.print("Nhập năm sinh (con): ");
-                    String namSinhCon = sc.nextLine();
-                    System.out.print("Nhập BankCard (con): ");
-                    String bankCardCon = sc.nextLine();
-                    System.out.print("Nhập Mobile (con): ");
-                    String mobileCon = sc.nextLine();
-                    System.out.print("Nhập MSSV (con): ");
-                    String mssv = sc.nextLine();
-
-                    con = new classCon();
-                    con.setCCCD(cccdCon);
-                    con.setHoTen(hoTenCon);
-                    con.setNamSinh(namSinhCon);
-                    con.setBankCard(bankCardCon);
-                    con.setMobile(mobileCon);
-                    con.setMSSV(mssv);
-
-                    System.out.println("\nĐã tạo con:");
-                    System.out.println(formatCon(con));
-                    break;
-
-                default:
-                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 0-4.");
-            }
-            if(choice == 0)
-                break;
+        ArrayList<Electronic> list = new ArrayList<>();
+        list.add(e1);
+        list.add(e2);
+        list.add(e3);
+        System.out.println("Trước sắp xếp");
+        for (Electronic e : list) {
+            e.inFor();
         }
-        System.out.println("Tổng thành viên: " + classOngCo.TongThanhVien);
+
+        Comparator<Electronic> compare
+                = new Comparator<>() {
+            @Override
+            public int compare(Electronic o1, Electronic o2) {
+                return o1.getID().compareToIgnoreCase(o2.getID());
+            }
+        };
+
+        Collections.sort(list, compare);
+        Collections.reverse(list);
+        System.out.println("Sau sắp xếp");
+        for (Electronic e : list) {
+            e.inFor();
+        }
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Tổng thành viên: " + classOngCo.TongThanhVien);
+//        classOngCo ongCo = null;
+//        classOngNoi ongNoi = null;
+//        classCha cha = null;
+//        classCon con = null;
+//
+//        while (true) {
+//            System.out.println("\n==== MENU KETHUA ====");
+//            System.out.println("1. Tạo ông Cố (classOngCo)");
+//            System.out.println("2. Tạo ông Nội (classOngNoi)");
+//            System.out.println("3. Tạo cha (classCha)");
+//            System.out.println("4. Tạo con (classCon)");
+//            System.out.println("0. Thoát");
+//            System.out.print("Chọn (0-4): ");
+//
+//            String line = sc.nextLine().trim();
+//            int choice;
+//            try {
+//                choice = Integer.parseInt(line);
+//            } catch (NumberFormatException e) {
+//                System.out.println("Vui lòng nhập 0-4.");
+//                continue;
+//            }
+//
+//            switch (choice) {
+//                case 0:
+//                    System.out.println("Thoát chương trình.");
+//                    sc.close();
+//                    break;
+//
+//                case 1:
+//                    System.out.print("Nhập CCCD: ");
+//                    String cccd = sc.nextLine();
+//                    System.out.print("Nhập họ tên: ");
+//                    String hoTen = sc.nextLine();
+//                    System.out.print("Nhập năm sinh: ");
+//                    String namSinh = sc.nextLine();
+//
+//                    ongCo = new classOngCo(cccd, hoTen, namSinh);
+//                    System.out.println("\nĐã tạo ông Cố:");
+//                    System.out.println(formatOngCo(ongCo));
+//                    break;
+//
+//                case 2:
+//                    System.out.print("Nhập CCCD (ông nội): ");
+//                    String cccdOn = sc.nextLine();
+//                    System.out.print("Nhập họ tên (ông nội): ");
+//                    String hoTenOn = sc.nextLine();
+//                    System.out.print("Nhập năm sinh (ông nội): ");
+//                    String namSinhOn = sc.nextLine();
+//                    System.out.print("Nhập BankCard (ông nội): ");
+//                    String bankCard = sc.nextLine();
+//
+//                    ongNoi = new classOngNoi(bankCard);
+//                    // set thông tin ông cố (thừa kế)
+//                    ongNoi.setCCCD(cccdOn);
+//                    ongNoi.setHoTen(hoTenOn);
+//                    ongNoi.setNamSinh(namSinhOn);
+//
+//                    System.out.println("\nĐã tạo ông Nội:");
+//                    System.out.println(formatOngNoi(ongNoi));
+//                    break;
+//
+//                case 3:
+//                    System.out.print("Nhập CCCD (cha): ");
+//                    String cccdCha = sc.nextLine();
+//                    System.out.print("Nhập họ tên (cha): ");
+//                    String hoTenCha = sc.nextLine();
+//                    System.out.print("Nhập năm sinh (cha): ");
+//                    String namSinhCha = sc.nextLine();
+//                    System.out.print("Nhập BankCard (cha): ");
+//                    String bankCardCha = sc.nextLine();
+//                    System.out.print("Nhập Mobile (cha): ");
+//                    String mobile = sc.nextLine();
+//
+//                    cha = new classCha();
+//                    // set lớp ông cố / ông nội
+//                    cha.setCCCD(cccdCha);
+//                    cha.setHoTen(hoTenCha);
+//                    cha.setNamSinh(namSinhCha);
+//                    cha.setBankCard(bankCardCha);
+//                    cha.setMobile(mobile);
+//
+//                    System.out.println("\nĐã tạo cha:");
+//                    System.out.println(formatCha(cha));
+//                    break;
+//
+//                case 4:
+//                    System.out.print("Nhập CCCD (con): ");
+//                    String cccdCon = sc.nextLine();
+//                    System.out.print("Nhập họ tên (con): ");
+//                    String hoTenCon = sc.nextLine();
+//                    System.out.print("Nhập năm sinh (con): ");
+//                    String namSinhCon = sc.nextLine();
+//                    System.out.print("Nhập BankCard (con): ");
+//                    String bankCardCon = sc.nextLine();
+//                    System.out.print("Nhập Mobile (con): ");
+//                    String mobileCon = sc.nextLine();
+//                    System.out.print("Nhập MSSV (con): ");
+//                    String mssv = sc.nextLine();
+//
+//                    con = new classCon();
+//                    con.setCCCD(cccdCon);
+//                    con.setHoTen(hoTenCon);
+//                    con.setNamSinh(namSinhCon);
+//                    con.setBankCard(bankCardCon);
+//                    con.setMobile(mobileCon);
+//                    con.setMSSV(mssv);
+//
+//                    System.out.println("\nĐã tạo con:");
+//                    System.out.println(formatCon(con));
+//                    break;
+//
+//                default:
+//                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 0-4.");
+//            }
+//            if(choice == 0)
+//                break;
+//        }
+//        System.out.println("Tổng thành viên: " + classOngCo.TongThanhVien);
     }
 
     private static String formatOngCo(classOngCo o) {

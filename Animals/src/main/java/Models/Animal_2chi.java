@@ -4,6 +4,8 @@
  */
 package Models;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Dell
@@ -24,6 +26,6 @@ public class Animal_2chi {
     }
 
     public Animal_2chi(String Name) {
+        this.Name = Name;
     }
-
 }
